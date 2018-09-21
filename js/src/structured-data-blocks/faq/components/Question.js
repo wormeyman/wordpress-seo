@@ -16,7 +16,6 @@ const RichTextWithAppendedSpace = appendSpace( RichText.Content );
  * A Question and answer pair within a FAQ block.
  */
 export default class Question extends Component {
-
 	/**
 	 * The insert and remove question buttons.
 	 *
@@ -49,15 +48,13 @@ export default class Question extends Component {
 				icon="trash"
 				label={ __( "Delete question", "wordpress-seo" ) }
 				onClick={ removeQuestion }
-			>
-			</IconButton>
+			/>
 			<IconButton
 				className="schema-faq-section-button editor-inserter__toggle"
 				icon="insert"
 				label={ __( "Insert question", "wordpress-seo" ) }
 				onClick={ insertQuestion }
-			>
-			</IconButton>
+			/>
 		</div>;
 	}
 
@@ -98,7 +95,7 @@ export default class Question extends Component {
 		const { question, answer } = this.props.attributes;
 
 		let newAnswer = answer.slice();
-		let image     = <img key={ media.id } alt={ media.alt } src={ media.url } />;
+		const image     = <img key={ media.id } alt={ media.alt } src={ media.url } />;
 
 		if ( newAnswer.push ) {
 			newAnswer.push( image );
@@ -121,7 +118,7 @@ export default class Question extends Component {
 			return false;
 		}
 
-		let image = contents.filter( ( node ) => node && node.type && node.type === "img" )[ 0 ];
+		const image = contents.filter( ( node ) => node && node.type && node.type === "img" )[ 0 ];
 
 		if ( ! image ) {
 			return false;
@@ -139,7 +136,7 @@ export default class Question extends Component {
 	 * @returns {Component} The component to be rendered.
 	 */
 	static Content( question ) {
-		return(
+		return (
 			<div className={ "schema-faq-section" } key={ question.id }>
 				<RichTextWithAppendedSpace
 					tagName="strong"
@@ -163,7 +160,7 @@ export default class Question extends Component {
 	 * @returns {Component} The how-to step editor.
 	 */
 	render() {
-		let {
+		const {
 			subElement,
 			attributes,
 			onChange,
@@ -172,10 +169,10 @@ export default class Question extends Component {
 			editorRef,
 		} = this.props;
 
-		let { id, question, answer } = attributes;
+		const { id, question, answer } = attributes;
 
 		return (
-			<div className="schema-faq-section" key={ id } >
+			<div className="schema-faq-section" key={ id }>
 				<RichText
 					className="schema-faq-question"
 					tagName="p"
