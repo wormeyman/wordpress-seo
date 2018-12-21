@@ -126,7 +126,7 @@ class Edit {
 	 * @returns {void}
 	 **/
 	_registerPlugin() {
-		if ( ! isGutenbergDataAvailable() ) {
+		if ( ! isGutenbergDataAvailable() || ! wp.editPost || ! wp.plugins ) {
 			return;
 		}
 

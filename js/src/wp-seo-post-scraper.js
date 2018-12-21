@@ -399,7 +399,13 @@ setWordPressSeoL10n();
 	 * @returns {string} The current editor mode.
 	 */
 	function getEditorMode() {
-		return select( "core/edit-post" ).getEditorMode();
+		const editPost = select( "core/edit-post" );
+
+		if ( ! editPost ) {
+			return "text";
+		}
+
+		return editPost.getEditorMode();
 	}
 
 	/**
@@ -595,9 +601,9 @@ setWordPressSeoL10n();
 			} );
 		}
 
-		if ( ! isGutenbergDataAvailable() ) {
+		// if ( ! isGutenbergDataAvailable() ) {
 			renderClassicEditorMetabox( editStore );
-		}
+		// }
 
 		initializationDone();
 		YoastSEO.app.refresh();
