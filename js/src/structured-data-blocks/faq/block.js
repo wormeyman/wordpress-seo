@@ -4,6 +4,7 @@ import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
 import Faq from "./components/FAQ";
+import { CATEGORY } from "../constants";
 
 const { registerBlockType } = window.wp.blocks;
 
@@ -12,7 +13,7 @@ export default () => {
 		title: __( "FAQ", "wordpress-seo" ),
 		description: __( "List your Frequently Asked Questions in an SEO-friendly way. You can only use one FAQ block per post.", "wordpress-seo" ),
 		icon: "editor-ul",
-		category: "yoast-structured-data-blocks",
+		category: CATEGORY,
 		keywords: [
 			__( "FAQ", "wordpress-seo" ),
 			__( "Frequently Asked Questions", "wordpress-seo" ),
