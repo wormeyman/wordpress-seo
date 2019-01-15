@@ -35,6 +35,7 @@ export default class HowTo extends Component {
 					<li>Steps</li>
 				</RequiredFields>
 			</Notice>
+
 			<InnerBlocks
 				template={ [
 					[ DURATION, {}, [] ],

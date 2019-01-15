@@ -1,8 +1,24 @@
 /* External dependencies */
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
-import { __ } from "@wordpress/i18n";
-import { RichText } from "@wordpress/editor";
+import { InnerBlocks } from "@wordpress/editor";
+
+const ALLOWED_BLOCKS = [
+	"core/paragraph",
+	"core/heading",
+	"core/shortcode",
+	"core/list",
+	"core/quote",
+	"core/image",
+	"core/gallery",
+	"core/",
+	"core/code",
+	"core/table",
+	"core/verse",
+	"core/media-text",
+	"core/button",
+	"core/spacer",
+];
 
 /**
  * Represents a Description block within the schema blocks.
@@ -36,17 +52,11 @@ export default class Description extends Component {
 	 * @returns {ReactElement} The rendered description edit.
 	 */
 	render() {
-		const { attributes } = this.props;
-
 		return (
-			<Fragment>
-				<RichText
-					identifier="description"
-					value={ attributes.description }
-					onChange={ this.handleDescriptionChange }
-					placeholder={ __( "Enter a description *", "wordpress-seo" ) }
-				/>
-			</Fragment>
+			<InnerBlocks
+				allowedBlocks={ ALLOWED_BLOCKS }
+				templateLock={ false }
+			/>
 		);
 	}
 
@@ -57,12 +67,11 @@ export default class Description extends Component {
 	 *
 	 * @returns {ReactElement} The rendered HTML for the frontend.
 	 */
-	static Content( { attributes } ) {
-		return <RichText.Content value={ attributes.description } />;
+	static Content() {
+		return <InnerBlocks.Content />;
 	}
 }
 
 Description.propTypes = {
-	attributes: PropTypes.object.isRequired,
 	setAttributes: PropTypes.func.isRequired,
 };

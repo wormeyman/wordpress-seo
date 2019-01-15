@@ -1,10 +1,11 @@
 /* External dependencies */
 import { Component } from "react";
 import PropTypes from "prop-types";
+import { InnerBlocks } from "@wordpress/editor";
 
 /* Internal dependencies */
-import StepDescription from "./StepDescription";
 import StepTitle from "./StepTitle";
+import { NAME as DESCRIPTION } from "../description";
 
 /**
  * Represents a Step block inside the block editor.
@@ -57,7 +58,13 @@ export default class Step extends Component {
 		// Because setAttributes is quite slow right after a block has been added we fake having a single step.
 		return <li style={ { margin: "0 10px" } }>
 			<StepTitle title={ attributes.title } setTitle={ this.setTitle } />
-			<StepDescription description={ attributes.description } setDescription={ this.setDescription } />
+			<InnerBlocks
+				allowedBlocks={ [ DESCRIPTION ] }
+				template={ [
+					[ DESCRIPTION, {}, [] ],
+				] }
+				templateLock="insert"
+			/>
 		</li>;
 	}
 
@@ -71,7 +78,7 @@ export default class Step extends Component {
 	static Content( { attributes } ) {
 		return <li>
 			<StepTitle.Content title={ attributes.title } />
-			<StepDescription.Content description={ attributes.description } />
+			<InnerBlocks.Content />
 		</li>;
 	}
 }
