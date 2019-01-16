@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { InnerBlocks } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
@@ -9,11 +9,11 @@ import Title from "../../shared-components/Title";
 import { NAME as DESCRIPTION } from "../description";
 
 /**
- * Represents a Step block inside the block editor.
+ * Represents a Question block inside the block editor.
  */
-export default class Step extends Component {
+export default class Question extends Component {
 	/**
-	 * Constructs a Step block component instance.
+	 * Constructs a Question block component instance.
 	 *
 	 * @param {Object} props Props for the React component.
 	 *
@@ -23,7 +23,6 @@ export default class Step extends Component {
 		super( props );
 
 		this.setTitle = this.setTitle.bind( this );
-		this.setDescription = this.setDescription.bind( this );
 	}
 
 	/**
@@ -38,27 +37,15 @@ export default class Step extends Component {
 	}
 
 	/**
-	 * Sets the description in the attributes to a value.
-	 *
-	 * @param {string} description The value to set the description to.
-	 *
-	 * @returns {void}
-	 */
-	setDescription( description ) {
-		this.props.setAttributes( { description } );
-	}
-
-	/**
-	 * Renders a Step edit inside the block editor.
+	 * Renders a Question edit inside the block editor.
 	 *
 	 * @returns {ReactElement} The rendered UI.
 	 */
 	render() {
 		const { attributes } = this.props;
 
-		// Because setAttributes is quite slow right after a block has been added we fake having a single step.
-		return <li style={ { margin: "0 10px" } }>
-			<Title title={ attributes.title } setTitle={ this.setTitle } placeholder={ __( "Enter a step title", "wordpress-seo" ) } />
+		return <Fragment>
+			<Title title={ attributes.title } setTitle={ this.setTitle } placeholder={ __( "Enter a question", "wordpress-seo" ) } />
 			<InnerBlocks
 				allowedBlocks={ [ DESCRIPTION ] }
 				template={ [
@@ -66,25 +53,25 @@ export default class Step extends Component {
 				] }
 				templateLock="all"
 			/>
-		</li>;
+		</Fragment>;
 	}
 
 	/**
-	 * Renders the content of the Step for the front end.
+	 * Renders the content of the Question for the front end.
 	 *
 	 * @param {Object} attributes The set attributes for this Step.
 	 *
 	 * @returns {ReactElement} The rendered HTML for the frontend.
 	 */
 	static Content( { attributes } ) {
-		return <li>
+		return <Fragment>
 			<Title.Content title={ attributes.title } />
 			<InnerBlocks.Content />
-		</li>;
+		</Fragment>;
 	}
 }
 
-Step.propTypes = {
+Question.propTypes = {
 	attributes: PropTypes.object.isRequired,
 	setAttributes: PropTypes.func.isRequired,
 };

@@ -7,17 +7,22 @@ import { RichText } from "@wordpress/editor";
  * Renders the editing UI for a step description.
  *
  * @param {string} description The current description.
- * @param {Function} setDescription The method to set a new description.
+ * @param {Function} setTitle The method to set a new description.
+ * @param {string} placeholder The placeholder to show in the editing field.
  *
  * @returns {ReactElement} The rendered UI.
  */
-const StepTitle = ( { title, setTitle }  ) => {
+const Title = ( { title, setTitle, placeholder }  ) => {
+	if ( placeholder === "" ) {
+		placeholder = __( "Enter a title", "wordpress-seo" );
+	}
+
 	return <RichText
-		className="yoast-step-title"
+		className="yoast-block-title"
 		tagName="p"
 		value={ title }
 		onChange={ setTitle }
-		placeholder={ __( "Enter a step title", "wordpress-seo" ) }
+		placeholder={ placeholder }
 		formattingControls={ [ "italic", "strikethrough", "link" ] }
 	/>;
 };
@@ -29,27 +34,29 @@ const StepTitle = ( { title, setTitle }  ) => {
  *
  * @returns {ReactElement} The rendered HTML for the content.
  */
-const StepTitleContent = ( { title } ) => {
+const TitleContent = ( { title } ) => {
 	return <RichText.Content value={ title } />;
 };
 
-StepTitleContent.propTypes = {
+TitleContent.propTypes = {
 	title: PropTypes.string,
 };
 
-StepTitleContent.defaultProps = {
+TitleContent.defaultProps = {
 	title: "",
 };
 
-StepTitle.Content = StepTitleContent;
+Title.Content = TitleContent;
 
-StepTitle.propTypes = {
+Title.propTypes = {
 	title: PropTypes.string,
 	setTitle: PropTypes.func.isRequired,
+	placeholder: PropTypes.string,
 };
 
-StepTitle.defaultProps = {
+Title.defaultProps = {
 	title: "",
+	placeholder: "",
 };
 
-export default StepTitle;
+export default Title;

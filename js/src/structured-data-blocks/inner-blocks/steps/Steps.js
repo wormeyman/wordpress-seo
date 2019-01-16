@@ -8,7 +8,7 @@ import { NAME as STEP } from "../step";
 /**
  * Represents the Steps block for a list of steps.
  */
-export default class Class extends Component {
+export default class Steps extends Component {
 	/**
 	 * Renders the editing UI fro the Steps block.
 	 *
