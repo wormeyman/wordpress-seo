@@ -6,7 +6,7 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Google Search Console, Content analysis, Readability
 Requires at least: 4.9
 Tested up to: 5.0.3
-Stable tag: 9.4
+Stable tag: 9.5
 Requires PHP: 5.2.4
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -110,7 +110,7 @@ Release Date: January 22nd, 2019
 
 Enhancements:
 
-* Completes the readabilty analysis for Swedish by adding the transition words, sentence beginnings and passive voice assessments. 
+* Completes the readability analysis for Swedish by adding the transition words, sentence beginnings and passive voice assessments.
 * Improves the transition word assessment for German.
 
 Bugfixes:
@@ -119,10 +119,11 @@ Bugfixes:
 * Fixes a bug where the 'Show archives for authors without posts in search results?' toggle would be shown when the 'Show author archives in search results?' toggle was disabled in the search appearance settings.
 * Fixes a bug where the front page would be shown in the page sitemap. Props to [stodorovic](https://github.com/stodorovic).
 * Fixes a bug where errors would be thrown in the classic editor when Gutenberg assets were enqueued without Gutenberg being active.
+* Fixes a bug where the editor would not be loaded when clicking the ‘edit’ button for a child page in the page overview. Props [mondrey](https://github.com/mondrey).
 
 Deprecated:
 
-* Deprecates the methods WPSEO_Utils::get_user_locale() and WPSEO_Utils:: get_language().
+* Deprecates the methods WPSEO_Utils::get_user_locale() and WPSEO_Utils::get_language().
 
 Other:
 
