@@ -11,6 +11,9 @@ const attributes = {
 	title: {
 		type: "string",
 	},
+	id: {
+		type: "string",
+	},
 };
 
 export const NAME = "yoast/question";

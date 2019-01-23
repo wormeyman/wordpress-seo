@@ -3,6 +3,8 @@ import { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { InnerBlocks } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
+import uniqueId from "lodash/uniqueId";
+import isUndefined from "lodash/isUndefined";
 
 /* Internal dependencies */
 import Title from "../../shared-components/Title";
@@ -36,6 +38,14 @@ export default class Question extends Component {
 		this.props.setAttributes( { title } );
 	}
 
+	componentDidMount() {
+		const { setAttributes, attributes } = this.props;
+
+		if ( isUndefined( attributes.id ) ) {
+			setAttributes( { id: uniqueId( "yoast-question-" ) } );
+		}
+	}
+
 	/**
 	 * Renders a Question edit inside the block editor.
 	 *
@@ -43,9 +53,10 @@ export default class Question extends Component {
 	 */
 	render() {
 		const { attributes } = this.props;
+		const { title, id } = attributes;
 
-		return <Fragment>
-			<Title title={ attributes.title } setTitle={ this.setTitle } placeholder={ __( "Enter a question", "wordpress-seo" ) } />
+		return <div id={ id }>
+			<Title title={ title } setTitle={ this.setTitle } placeholder={ __( "Enter a question", "wordpress-seo" ) } />
 			<InnerBlocks
 				allowedBlocks={ [ DESCRIPTION ] }
 				template={ [
@@ -53,7 +64,7 @@ export default class Question extends Component {
 				] }
 				templateLock="all"
 			/>
-		</Fragment>;
+		</div>;
 	}
 
 	/**
@@ -64,10 +75,10 @@ export default class Question extends Component {
 	 * @returns {ReactElement} The rendered HTML for the frontend.
 	 */
 	static Content( { attributes } ) {
-		return <Fragment>
+		return <div id={ attributes.id }>
 			<Title.Content title={ attributes.title } />
 			<InnerBlocks.Content />
-		</Fragment>;
+		</div>;
 	}
 }
 
