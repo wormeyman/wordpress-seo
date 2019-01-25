@@ -63,8 +63,8 @@ class WPSEO_Structured_Data_Question implements WPSEO_Structured_Data_Block {
 		return array(
 			'@type' => 'Question',
 			'name' => $this->question,
-			'@id' => $context['current_url'] . '#' . $this->id,
-			'url' => $context['current_url'] . '#' . $this->id,
+			'@id' => $context['current_url'] . '#' . rawurlencode( $this->id ),
+			'url' => $context['current_url'] . '#' . rawurlencode( $this->id ),
 			'answerCount' => 1,
 			'acceptedAnswer' => array(
 				'@type' => 'Answer',

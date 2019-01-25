@@ -1,7 +1,7 @@
 /* External dependencies */
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
-import { InnerBlocks } from "@wordpress/editor";
+import { InnerBlocks, cleanForSlug } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 import uniqueId from "lodash/uniqueId";
 import isUndefined from "lodash/isUndefined";
@@ -35,7 +35,10 @@ export default class Question extends Component {
 	 * @returns {void}
 	 */
 	setTitle( title ) {
-		this.props.setAttributes( { title } );
+		this.props.setAttributes( {
+			title,
+			id: cleanForSlug( title ),
+		} );
 	}
 
 	componentDidMount() {
@@ -53,9 +56,9 @@ export default class Question extends Component {
 	 */
 	render() {
 		const { attributes } = this.props;
-		const { title, id } = attributes;
+		const { title } = attributes;
 
-		return <div id={ id }>
+		return <div>
 			<Title title={ title } setTitle={ this.setTitle } placeholder={ __( "Enter a question", "wordpress-seo" ) } />
 			<InnerBlocks
 				allowedBlocks={ [ DESCRIPTION ] }

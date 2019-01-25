@@ -25,6 +25,18 @@ class WPSEO_Structured_Data_Block_How_To implements WPSEO_Structured_Data_Root_B
 	}
 
 	/**
+	 * Generates a unique ID if the how to has no description to use as an ID.
+	 *
+	 * @return string The ID to use.
+	 */
+	private function generate_unique_id() {
+		static $id_counter = 0;
+		$prefix = 'how-to-';
+
+		return $prefix . (string) ++$id_counter;
+	}
+
+	/**
 	 * Builds the JSON for the structured data block.
 	 *
 	 * @param array $context The context necessary to render some JSON.
@@ -36,16 +48,11 @@ class WPSEO_Structured_Data_Block_How_To implements WPSEO_Structured_Data_Root_B
 
 		$how_to = array(
 			'@type' => 'HowTo',
-			'@id' => $id,
 		);
 
 		if ( isset( $context['post_title'] ) ) {
 			$how_to['name'] = $context['post_title'];
 		}
-
-		$main_entity = array(
-			'@id' => $id,
-		);
 
 		foreach ( $this->inner_blocks as $inner_block ) {
 			switch ( $inner_block['blockName'] ) {
@@ -59,6 +66,7 @@ class WPSEO_Structured_Data_Block_How_To implements WPSEO_Structured_Data_Root_B
 					$description = render_block( $inner_block );
 
 					$how_to['description'] = $description;
+					$id = wp_trim_words( $description, 8 );
 					break;
 
 				case WPSEO_Structured_Data_Steps::NAME:
@@ -68,6 +76,16 @@ class WPSEO_Structured_Data_Block_How_To implements WPSEO_Structured_Data_Root_B
 					break;
 			}
 		}
+
+		if ( $id === '' ) {
+			$id = $this->generate_unique_id();
+		}
+
+		$id = $context['current_url'] . '#' . rawurlencode( $id );
+		$how_to['@id'] = $id;
+		$main_entity = array(
+			'@id' => $id,
+		);
 
 		return new WPSEO_Structured_Data_Graph_Part(
 			array( $how_to ),

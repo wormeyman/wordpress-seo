@@ -1,7 +1,7 @@
 /* External dependencies */
 import { Component } from "react";
 import PropTypes from "prop-types";
-import { InnerBlocks } from "@wordpress/editor";
+import { InnerBlocks, cleanForSlug } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -34,7 +34,10 @@ export default class Step extends Component {
 	 * @returns {void}
 	 */
 	setTitle( title ) {
-		this.props.setAttributes( { title } );
+		this.props.setAttributes( {
+			title,
+			id: cleanForSlug( title ),
+		} );
 	}
 
 	/**
@@ -77,7 +80,7 @@ export default class Step extends Component {
 	 * @returns {ReactElement} The rendered HTML for the frontend.
 	 */
 	static Content( { attributes } ) {
-		return <li>
+		return <li id={ attributes.id }>
 			<Title.Content title={ attributes.title } />
 			<InnerBlocks.Content />
 		</li>;
