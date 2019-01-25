@@ -7,7 +7,6 @@ import registerQuestionBlock from "./structured-data-blocks/inner-blocks/questio
 import registerDurationBlock from "./structured-data-blocks/inner-blocks/duration";
 import registerDescriptionBlock from "./structured-data-blocks/inner-blocks/description";
 import registerFAQBlock from "./structured-data-blocks/faq/block";
-import registerInnerBlocksFAQBlock from "./structured-data-blocks/inner-blocks-faq/block";
 
 registerHowToBlock();
 registerInnerBlocksHowToBlock();
@@ -15,7 +14,6 @@ registerStepsBlock();
 registerStepBlock();
 registerDurationBlock();
 registerDescriptionBlock();
-registerFAQBlock();
 registerQuestionsBlock();
 registerQuestionBlock();
-registerInnerBlocksFAQBlock();
+registerFAQBlock();

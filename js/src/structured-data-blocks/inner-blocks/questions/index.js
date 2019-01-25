@@ -3,7 +3,7 @@ import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
 /* Internal dependencies */
-import { NAME as FAQ } from "../../inner-blocks-faq/block";
+import { NAME as FAQ } from "../../faq/block";
 import { CATEGORY } from "../../constants";
 import Questions from "./Questions";
 

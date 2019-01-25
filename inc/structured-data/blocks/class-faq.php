@@ -7,7 +7,7 @@
  * Represents a structured FAQ.
  */
 class WPSEO_Structured_Data_FAQ implements WPSEO_Structured_Data_Root_Block {
-	const NAME = 'yoast/faq-block-inner-blocks';
+	const NAME = 'yoast/faq-block';
 
 	/**
 	 * @var array The blocks inside this block.

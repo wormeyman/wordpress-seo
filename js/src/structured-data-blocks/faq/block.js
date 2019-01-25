@@ -1,15 +1,20 @@
 /* External dependencies */
-import React from "react";
 import { __ } from "@wordpress/i18n";
+import { registerBlockType } from "@wordpress/blocks";
 
 /* Internal dependencies */
-import Faq from "./components/FAQ";
+import FAQ from "./FAQ";
 import { CATEGORY } from "../constants";
+import {
+	attributes as attributesBeforeInnerBlocks,
+	Content as ContentBeforeInnerBlocks,
+	migrate as migrateFromBeforeInnerBlocks,
+} from "./legacy/beforeInnerBlocks";
 
-const { registerBlockType } = window.wp.blocks;
+export const NAME = "yoast/faq-block";
 
 export default () => {
-	registerBlockType( "yoast/faq-block", {
+	registerBlockType( NAME, {
 		title: __( "FAQ", "wordpress-seo" ),
 		description: __( "List your Frequently Asked Questions in an SEO-friendly way. You can only use one FAQ block per post.", "wordpress-seo" ),
 		icon: "editor-ul",
@@ -22,46 +27,23 @@ export default () => {
 		supports: {
 			multiple: false,
 		},
-		// Block attributes - decides what to save and how to parse it from and to HTML.
+		edit: FAQ,
+		save: FAQ.Content,
+
 		attributes: {
-			questions: {
-				type: "array",
+			/*
+			 * Gutenberg has a bug where you cannot remove an old attribute and have
+			 * it migrate using the `deprecated` array. The relevant issue is: https://github.com/WordPress/gutenberg/issues/10406.
+			 */
+			...attributesBeforeInnerBlocks,
+		},
+
+		deprecated: [
+			{
+				attributes: attributesBeforeInnerBlocks,
+				save: ContentBeforeInnerBlocks,
+				migrate: migrateFromBeforeInnerBlocks,
 			},
-			additionalListCssClasses: {
-				type: "string",
-			},
-		},
-
-		/**
-		 * The edit function describes the structure of your block in the context of the editor.
-		 * This represents what the editor will render when the block is used.
-		 *
-		 * The "edit" property must be a valid function.
-		 *
-		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-		 * @returns {Component} The editor component.
-		 */
-		edit: ( { attributes, setAttributes, className } ) => {
-			// Because setAttributes is quite slow right after a block has been added we fake having a single step.
-			if ( ! attributes.questions || attributes.questions.length === 0 ) {
-				attributes.questions = [ { id: Faq.generateId( "faq-question" ), question: [], answer: [] } ];
-			}
-
-			return <Faq { ...{ attributes, setAttributes, className } } />;
-		},
-
-		/**
-		 * The save function defines the way in which the different attributes should be combined
-		 * into the final markup, which is then serialized by Gutenberg into post_content.
-		 *
-		 * The "save" property must be specified and must be a valid function.
-		 *
-		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-		 * @returns {Component} The display component.
-		 */
-		// eslint-disable-next-line react/display-name
-		save: function( { attributes } ) {
-			return <Faq.Content { ...attributes } />;
-		},
+		],
 	} );
 };
