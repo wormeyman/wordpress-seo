@@ -5,18 +5,20 @@ import { registerBlockType } from "@wordpress/blocks";
 /* Internal dependencies */
 import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
-import Salary from "./Salary";
+import ValidThrough from "./ValidThrough";
 
-export const NAME = "yoast/salary";
+export const NAME = "yoast/validthrough";
 
 export default () => {
 	registerBlockType( NAME, {
-		title: __( "Salary", "wordpress-seo" ),
-		description: __( "A job salary", "wordpress-seo" ),
+		title: __( "Expiration date", "wordpress-seo" ),
+		description: __( "A job expiration date", "wordpress-seo" ),
 		icon: "image-filter",
 		category: CATEGORY,
 		keywords: [
-			__( "Salary", "wordpress-seo" ),
+			__( "Expiration date", "wordpress-seo" ),
+			__( "Expiration", "wordpress-seo" ),
+
 		],
 		parent: [ JOBS ],
 		supports: {
@@ -24,21 +26,12 @@ export default () => {
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
 		attributes: {
-			salary: {
-				type: "string",
-			},
-			currency: {
-				type: "string",
-			},
-			unitText: {
-				type: "string",
-			},
-			unitTextFrontEnd: {
+			validThrough: {
 				type: "string",
 			},
 		},
 
-		edit: Salary,
-		save: Salary.Content,
+		edit: ValidThrough,
+		save: ValidThrough.Content,
 	} );
 };

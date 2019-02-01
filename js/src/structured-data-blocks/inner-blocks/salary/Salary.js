@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component, Fragment } from "react";
+import { Component } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  */
 export default class Salary extends Component {
 	/**
-	 * Constructs a Step block component instance.
+	 * Constructs a Salary block component instance.
 	 *
 	 * @param {Object} props Props for the React component.
 	 *
@@ -94,9 +94,9 @@ export default class Salary extends Component {
 	}
 
 	/**
-	 * Renders the front end content for the duration block.
+	 * Renders the front end content for the Salary block.
 	 *
-	 * @param {Object} attributes The attributes for the Duration block.
+	 * @param {Object} attributes The attributes for the Salary block.
 	 *
 	 * @returns {ReactElement} The rendered HTML for the front end.
 	 */
@@ -108,20 +108,19 @@ export default class Salary extends Component {
 		];
 
 		return (
-			<Fragment>
-				<p>
-					{ attributesArrayRender.map( attributeData => {
-						if ( attributeData ) {
-							return <span>{ attributeData } </span>;
-						}
-					} ) }
-				</p>
-			</Fragment>
+			<li>
+				<span>You wil earn </span>
+				{ attributesArrayRender.map( attributeData => {
+					if ( attributeData ) {
+						return <span key={ attributeData }>{ attributeData } </span>;
+					}
+				} ) }
+			</li>
 		);
 	}
 
 	/**
-     * Renders the editing for the duration block.
+     * Renders the editing for the Salary block.
      *
 	 * @returns {ReactElement} The rendered edit UI.
      */
@@ -136,16 +135,16 @@ export default class Salary extends Component {
 			"GBP",
 		];
 
-		if ( attributes.unitTextFrontEnd === null ) {
-			setAttributes( { unitTextFrontEnd: "an hour" } );
+		if ( attributes.unitTextFrontEnd === undefined ) {
+			setAttributes( { unitTextFrontEnd: __( "a month", "wordpress-seo" ) } );
 		}
 
-		if ( attributes.currency === null ) {
+		if ( attributes.currency === undefined ) {
 			setAttributes( { currency: "EUR" } );
 		}
 
 		return (
-			<fieldset className="schema-jobs-salary">
+			<fieldset>
 				<input
 					value={ attributes.salary }
 					onChange={ this.handleChangeSalary }
@@ -153,11 +152,10 @@ export default class Salary extends Component {
 					step="500"
 					placeholder="'3500.00'"
 				/>
-				<select onChange={ this.handleChangeCurrency }>
+				<select value={ attributes.currency } onChange={ this.handleChangeCurrency }>
 					{ currencyArray.map( currencyData => {
 						return (
 							<option
-								selected={ currencyData === attributes.currency }
 								key={ currencyData }
 								value={ currencyData }
 							>
@@ -166,7 +164,7 @@ export default class Salary extends Component {
 						);
 					} ) }
 				</select>
-				<select onChange={ this.handleChangeUnitText }>
+				<select value={ attributes.unitTextFrontEnd } onChange={ this.handleChangeUnitText }>
 					{ unitTextArray.map( unitTextData => {
 						const {
 							unitTextKey,
@@ -178,7 +176,6 @@ export default class Salary extends Component {
 
 						return (
 							<option
-								selected={ unitTextValue === attributes.unitTextFrontEnd }
 								key={ unitTextKey }
 								value={ unitTextValue }
 							>

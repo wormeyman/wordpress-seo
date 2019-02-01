@@ -5,18 +5,19 @@ import { registerBlockType } from "@wordpress/blocks";
 /* Internal dependencies */
 import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
-import Salary from "./Salary";
+import RemoteJob from "./RemoteJob";
 
-export const NAME = "yoast/salary";
+export const NAME = "yoast/remotejob";
 
 export default () => {
 	registerBlockType( NAME, {
-		title: __( "Salary", "wordpress-seo" ),
-		description: __( "A job salary", "wordpress-seo" ),
+		title: __( "Remote Job", "wordpress-seo" ),
+		description: __( "A Remote Job block", "wordpress-seo" ),
 		icon: "image-filter",
 		category: CATEGORY,
 		keywords: [
-			__( "Salary", "wordpress-seo" ),
+			__( "Remote Job", "wordpress-seo" ),
+			__( "Remote", "wordpress-seo" ),
 		],
 		parent: [ JOBS ],
 		supports: {
@@ -24,21 +25,15 @@ export default () => {
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
 		attributes: {
-			salary: {
+			jobLocationType: {
 				type: "string",
 			},
-			currency: {
-				type: "string",
-			},
-			unitText: {
-				type: "string",
-			},
-			unitTextFrontEnd: {
+			applicantLocationRequirements: {
 				type: "string",
 			},
 		},
 
-		edit: Salary,
-		save: Salary.Content,
+		edit: RemoteJob,
+		save: RemoteJob.Content,
 	} );
 };

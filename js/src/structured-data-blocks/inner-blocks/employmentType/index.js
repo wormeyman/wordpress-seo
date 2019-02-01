@@ -5,40 +5,35 @@ import { registerBlockType } from "@wordpress/blocks";
 /* Internal dependencies */
 import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
-import Salary from "./Salary";
+import EmploymentType from "./EmploymentType";
 
-export const NAME = "yoast/salary";
+export const NAME = "yoast/employmenttype";
 
 export default () => {
 	registerBlockType( NAME, {
-		title: __( "Salary", "wordpress-seo" ),
-		description: __( "A job salary", "wordpress-seo" ),
-		icon: "image-filter",
+		title: __( "Employment Type", "wordpress-seo" ),
+		description: __( "A job employment type", "wordpress-seo" ),
+		icon: "portfolio",
 		category: CATEGORY,
 		keywords: [
-			__( "Salary", "wordpress-seo" ),
+			__( "Employment type", "wordpress-seo" ),
 		],
 		parent: [ JOBS ],
+		// Allow only one EmploymentType block per post.
 		supports: {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
 		attributes: {
-			salary: {
+			employmentTypeFrontEnd: {
 				type: "string",
 			},
-			currency: {
-				type: "string",
-			},
-			unitText: {
-				type: "string",
-			},
-			unitTextFrontEnd: {
+			employmentType: {
 				type: "string",
 			},
 		},
 
-		edit: Salary,
-		save: Salary.Content,
+		edit: EmploymentType,
+		save: EmploymentType.Content,
 	} );
 };

@@ -22,6 +22,7 @@ export default () => {
 		supports: {
 			multiple: false,
 		},
+
 		edit: HowTo,
 		save: HowTo.Content,
 	} );
