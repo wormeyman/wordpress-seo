@@ -3,37 +3,36 @@ import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
 /* Internal dependencies */
-import { NAME as JOBS } from "../../inner-blocks-jobs/block";
+import { NAME as ADDRESS } from "../address";
 import { CATEGORY } from "../../constants";
-import CompanyWebsite from "./CompanyWebsite";
+import AddressLocality from "./AddressLocality";
 
 const attributes = {
-	hiringOrganizationURL: {
+	addressLocality: {
 		type: "string",
 	},
 };
 
-export const NAME = "yoast/companywebsite";
+export const NAME = "yoast/addresslocality";
 
 export default () => {
 	registerBlockType( NAME, {
-		title: __( "Company Website", "wordpress-seo" ),
-		description: __( "A job company website", "wordpress-seo" ),
-		icon: "image-filter",
+		title: __( "City", "wordpress-seo" ),
+		description: __( "A city address", "wordpress-seo" ),
+		icon: "admin-site",
 		category: CATEGORY,
 		keywords: [
-			__( "Company Website", "wordpress-seo" ),
-			__( "Website", "wordpress-seo" ),
-
+			__( "City", "wordpress-seo" ),
 		],
-		parent: [ JOBS ],
+		parent: [ ADDRESS ],
+		// Allow only one AddressLocality block per post.
 		supports: {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
 		attributes,
 
-		edit: CompanyWebsite,
-		save: CompanyWebsite.Content,
+		edit: AddressLocality,
+		save: AddressLocality.Content,
 	} );
 };

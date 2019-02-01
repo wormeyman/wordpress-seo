@@ -7,6 +7,21 @@ import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
 import Salary from "./Salary";
 
+const attributes = {
+	salary: {
+		type: "string",
+	},
+	currency: {
+		type: "string",
+	},
+	unitText: {
+		type: "string",
+	},
+	unitTextFrontEnd: {
+		type: "string",
+	},
+};
+
 export const NAME = "yoast/salary";
 
 export default () => {
@@ -23,20 +38,7 @@ export default () => {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
-		attributes: {
-			salary: {
-				type: "string",
-			},
-			currency: {
-				type: "string",
-			},
-			unitText: {
-				type: "string",
-			},
-			unitTextFrontEnd: {
-				type: "string",
-			},
-		},
+		attributes,
 
 		edit: Salary,
 		save: Salary.Content,

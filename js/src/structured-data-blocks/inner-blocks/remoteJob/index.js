@@ -7,6 +7,15 @@ import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
 import RemoteJob from "./RemoteJob";
 
+const attributes = {
+	jobLocationType: {
+		type: "string",
+	},
+	applicantLocationRequirements: {
+		type: "string",
+	},
+};
+
 export const NAME = "yoast/remotejob";
 
 export default () => {
@@ -24,14 +33,7 @@ export default () => {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
-		attributes: {
-			jobLocationType: {
-				type: "string",
-			},
-			applicantLocationRequirements: {
-				type: "string",
-			},
-		},
+		attributes,
 
 		edit: RemoteJob,
 		save: RemoteJob.Content,

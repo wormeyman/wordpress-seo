@@ -7,6 +7,15 @@ import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
 import EmploymentType from "./EmploymentType";
 
+const attributes = {
+	employmentTypeFrontEnd: {
+		type: "string",
+	},
+	employmentType: {
+		type: "string",
+	},
+};
+
 export const NAME = "yoast/employmenttype";
 
 export default () => {
@@ -24,14 +33,7 @@ export default () => {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
-		attributes: {
-			employmentTypeFrontEnd: {
-				type: "string",
-			},
-			employmentType: {
-				type: "string",
-			},
-		},
+		attributes,
 
 		edit: EmploymentType,
 		save: EmploymentType.Content,

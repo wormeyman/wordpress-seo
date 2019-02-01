@@ -7,6 +7,12 @@ import { NAME as JOBS } from "../../inner-blocks-jobs/block";
 import { CATEGORY } from "../../constants";
 import ValidThrough from "./ValidThrough";
 
+const attributes = {
+	validThrough: {
+		type: "string",
+	},
+};
+
 export const NAME = "yoast/validthrough";
 
 export default () => {
@@ -25,11 +31,7 @@ export default () => {
 			multiple: false,
 		},
 		// Block attributes - decides what to save and how to parse it from and to HTML.
-		attributes: {
-			validThrough: {
-				type: "string",
-			},
-		},
+		attributes,
 
 		edit: ValidThrough,
 		save: ValidThrough.Content,
