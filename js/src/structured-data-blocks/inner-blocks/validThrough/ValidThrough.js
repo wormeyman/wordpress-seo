@@ -42,16 +42,14 @@ export default class ValidThrough extends Component {
 	 *
 	 * @returns {ReactElement} The rendered HTML for the front end.
 	 */
-	static Content( attributes ) {
-		const { validThrough } = attributes;
-
-		if ( ! validThrough ) {
+	static Content( { attributes } ) {
+		if ( ! attributes.validThrough ) {
 			return null;
 		}
 
 		return (
 			<li>
-				{ __( "Vacancy expiration date:", "yoast-jobs" ) } { validThrough }.
+				<span>{ __( "Vacancy expiration date", "wordpress-seo" ) + ": " } { attributes.validThrough }</span>
 			</li>
 		);
 	}
@@ -64,14 +62,15 @@ export default class ValidThrough extends Component {
 	render() {
 		const { attributes } = this.props;
 
-		return (
+		return <li>
+			<span>{ __( "Vacancy expiration date", "wordpress-seo" ) + ": " }</span>
 			<input
 				value={ attributes.validThrough }
 				type="date"
-				placeholder={ __( "Vacancy expiration date:", "yoast-jobs" ) }
+				placeholder={ __( "11/08/2021", "wordpress-seo" ) }
 				onChange={ this.handleChangeText }
 			/>
-		);
+		</li>;
 	}
 }
 

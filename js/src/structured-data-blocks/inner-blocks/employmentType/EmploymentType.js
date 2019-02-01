@@ -44,14 +44,14 @@ export default class EmploymentType extends Component {
 	 */
 	static createEmploymentArray() {
 		return [
-			EmploymentType.createEmployment( "FULL_TIME", __( "full time", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "PART_TIME", __( "part time", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "CONTRACTOR", __( "contractor", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "TEMPORARY", __( "temporary", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "INTERN", __( "intern", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "VOLUNTEER", __( "volunteer", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "PER_DIEM", __( "per diem", "yoast-jobs" ) ),
-			EmploymentType.createEmployment( "OTHER", __( "other", "yoast-jobs" ) ),
+			EmploymentType.createEmployment( "FULL_TIME", __( "full time", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "PART_TIME", __( "part time", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "CONTRACTOR", __( "contractor", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "TEMPORARY", __( "temporary", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "INTERN", __( "intern", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "VOLUNTEER", __( "volunteer", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "PER_DIEM", __( "per diem", "wordpress-seo" ) ),
+			EmploymentType.createEmployment( "OTHER", __( "other", "wordpress-seo" ) ),
 		];
 	}
 
@@ -76,7 +76,7 @@ export default class EmploymentType extends Component {
 	 * @returns {ReactElement} The rendered HTML for the front end.
 	 */
 	static Content( { attributes } ) {
-		return <li>This is a { attributes.employmentTypeFrontEnd } job</li>;
+		return <li>{ __( "This job is", "wordpress-seo" ) + " " }{ attributes.employmentTypeFrontEnd }</li>;
 	}
 
 	/**
@@ -89,12 +89,13 @@ export default class EmploymentType extends Component {
 
 		const employmentArray = EmploymentType.createEmploymentArray();
 
-		return <fieldset>
+		return <li>
+			<span>{ __( "This job is", "wordpress-seo" ) + " " }</span>
 			<select value={ attributes.employmentTypeFrontEnd } onChange={ this.handleChangeEmployment }>
 				{ employmentArray.map( employmentData => {
 					const { employmentKey, employmentValue } = employmentData;
 
-					if ( attributes.employmentTypeFrontEnd === undefined ) {
+					if ( ! attributes.employmentTypeFrontEnd ) {
 						setAttributes( { employmentTypeFrontEnd: __( "full time", "wordpress-seo" ) } );
 					}
 
@@ -112,7 +113,7 @@ export default class EmploymentType extends Component {
 					);
 				} ) }
 			</select>
-		</fieldset>;
+		</li>;
 	}
 }
 

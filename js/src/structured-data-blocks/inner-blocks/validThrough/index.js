@@ -18,9 +18,9 @@ export default () => {
 		keywords: [
 			__( "Expiration date", "wordpress-seo" ),
 			__( "Expiration", "wordpress-seo" ),
-
 		],
 		parent: [ JOBS ],
+		// Allow only one EmploymentType block per post.
 		supports: {
 			multiple: false,
 		},

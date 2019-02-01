@@ -43,12 +43,12 @@ export default class CompanyWebsite extends Component {
 	 * @returns {ReactElement} The rendered HTML for the front end.
 	 */
 	static Content( { attributes } ) {
-		if ( attributes.hiringOrganizationURL === undefined ) {
+		if ( ! attributes.hiringOrganizationURL ) {
 			return null;
 		}
 
 		return <li>
-			{ __( "Company website", "wordpress-seo" ) + ":" } { attributes.hiringOrganizationURL }
+			{ __( "Company website", "wordpress-seo" ) + ": " } { attributes.hiringOrganizationURL }
 		</li>;
 	}
 
@@ -60,12 +60,15 @@ export default class CompanyWebsite extends Component {
 	render() {
 		const { attributes } = this.props;
 
-		return <input
-			value={ attributes.hiringOrganizationURL }
-			onChange={ this.handleChangeText }
-			type="url"
-			placeholder="Company website"
-		/>;
+		return <li>
+			<span>{ __( "Company website", "wordpress-seo" ) + ": " }</span>
+			<input
+				value={ attributes.hiringOrganizationURL }
+				onChange={ this.handleChangeText }
+				type="url"
+				placeholder={ __( "https://yoast.com", "wordpress-seo" ) }
+			/>
+		</li>;
 	}
 }
 

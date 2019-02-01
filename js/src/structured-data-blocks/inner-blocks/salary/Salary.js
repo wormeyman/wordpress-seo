@@ -46,11 +46,11 @@ export default class Salary extends Component {
      */
 	static createUnitTextArray() {
 		return [
-			Salary.createUnitText( "HOUR",  __( "an hour", "yoast-jobs" ) ),
-			Salary.createUnitText( "DAY",   __( "a day", "yoast-jobs" ) ),
-			Salary.createUnitText( "WEEK",  __( "a week", "yoast-jobs" ) ),
-			Salary.createUnitText( "MONTH", __( "a month", "yoast-jobs" ) ),
-			Salary.createUnitText( "YEAR",  __( "a year", "yoast-jobs" ) ),
+			Salary.createUnitText( "HOUR",  __( "an hour", "wordpress-seo" ) ),
+			Salary.createUnitText( "DAY",   __( "a day", "wordpress-seo" ) ),
+			Salary.createUnitText( "WEEK",  __( "a week", "wordpress-seo" ) ),
+			Salary.createUnitText( "MONTH", __( "a month", "wordpress-seo" ) ),
+			Salary.createUnitText( "YEAR",  __( "a year", "wordpress-seo" ) ),
 		];
 	}
 
@@ -107,9 +107,13 @@ export default class Salary extends Component {
 			attributes.unitTextFrontEnd,
 		];
 
+		if ( ! attributes.salary ) {
+			return null;
+		}
+
 		return (
 			<li>
-				<span>You wil earn </span>
+				<span>{ __( "You wil earn", "wordpress-seo" ) + " " }</span>
 				{ attributesArrayRender.map( attributeData => {
 					if ( attributeData ) {
 						return <span key={ attributeData }>{ attributeData } </span>;
@@ -135,22 +139,23 @@ export default class Salary extends Component {
 			"GBP",
 		];
 
-		if ( attributes.unitTextFrontEnd === undefined ) {
+		if ( ! attributes.unitTextFrontEnd ) {
 			setAttributes( { unitTextFrontEnd: __( "a month", "wordpress-seo" ) } );
 		}
 
-		if ( attributes.currency === undefined ) {
+		if ( ! attributes.currency ) {
 			setAttributes( { currency: "EUR" } );
 		}
 
 		return (
-			<fieldset>
+			<li>
+				<span>You will earn </span>
 				<input
 					value={ attributes.salary }
 					onChange={ this.handleChangeSalary }
 					type="number"
 					step="500"
-					placeholder="'3500.00'"
+					placeholder="3500.00"
 				/>
 				<select value={ attributes.currency } onChange={ this.handleChangeCurrency }>
 					{ currencyArray.map( currencyData => {
@@ -184,7 +189,7 @@ export default class Salary extends Component {
 						);
 					} ) }
 				</select>
-			</fieldset>
+			</li>
 		);
 	}
 }

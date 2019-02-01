@@ -47,13 +47,13 @@ export default class RemoteJob extends Component {
 
 		if ( applicantLocationRequirements && jobLocationType ) {
 			return <li>
-				{ __( "Remote job in", "yoast-jobs" ) } { applicantLocationRequirements }
+				{ __( "This is a remote job in", "wordpress-seo" ) + " " }{ applicantLocationRequirements }
 			</li>;
 		}
 
 		if ( ! applicantLocationRequirements && jobLocationType ) {
 			return <li>
-				{ __( "Remote job", "yoast-jobs" ) }
+				{ __( "This is a remote job", "wordpress-seo" ) }
 			</li>;
 		}
 
@@ -70,12 +70,15 @@ export default class RemoteJob extends Component {
 
 		setAttributes( { jobLocationType: "TELECOMMUTE" } );
 
-		return <input
-			value={ attributes.applicantLocationRequirements }
-			onChange={ this.handleChangeText }
-			type="text"
-			placeholder={ __( "Remote country (optional)", "yoast-jobs" ) }
-		/>;
+		return <li>
+			<span>This is a remote job in </span>
+			<input
+				value={ attributes.applicantLocationRequirements }
+				onChange={ this.handleChangeText }
+				type="text"
+				placeholder={ __( "England (optional)", "wordpress-seo" ) }
+			/>
+		</li>;
 	}
 }
 
