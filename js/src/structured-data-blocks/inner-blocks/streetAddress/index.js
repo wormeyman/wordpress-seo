@@ -8,7 +8,7 @@ import { CATEGORY } from "../../constants";
 import StreetAddress from "./StreetAddress";
 
 const attributes = {
-	StreetAddress: {
+	streetAddress: {
 		type: "string",
 	},
 };

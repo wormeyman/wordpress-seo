@@ -6,11 +6,11 @@ import { __ } from "@wordpress/i18n";
 import PropTypes from "prop-types";
 
 /**
- * An PostalCode block component.
+ * A PostalCode block component.
  */
 export default class PostalCode extends Component {
 	/**
-	 * Constructs an PostalCode block component instance.
+	 * Constructs a PostalCode block component instance.
 	 *
 	 * @param {Object} props Props for the React component.
 	 *

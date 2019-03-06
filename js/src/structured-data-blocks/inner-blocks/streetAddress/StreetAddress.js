@@ -6,11 +6,11 @@ import { __ } from "@wordpress/i18n";
 import PropTypes from "prop-types";
 
 /**
- * An StreetAddress block component.
+ * A StreetAddress block component.
  */
 export default class StreetAddress extends Component {
 	/**
-	 * Constructs an StreetAddress block component instance.
+	 * Constructs a StreetAddress block component instance.
 	 *
 	 * @param {Object} props Props for the React component.
 	 *

@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -112,14 +112,14 @@ export default class Salary extends Component {
 		}
 
 		return (
-			<li>
+			<Fragment>
 				<span>{ __( "You wil earn", "wordpress-seo" ) + " " }</span>
 				{ attributesArrayRender.map( attributeData => {
 					if ( attributeData ) {
 						return <span key={ attributeData }>{ attributeData } </span>;
 					}
 				} ) }
-			</li>
+			</Fragment>
 		);
 	}
 
@@ -148,7 +148,7 @@ export default class Salary extends Component {
 		}
 
 		return (
-			<li>
+			<Fragment>
 				<span>You will earn </span>
 				<input
 					value={ attributes.salary }
@@ -189,7 +189,7 @@ export default class Salary extends Component {
 						);
 					} ) }
 				</select>
-			</li>
+			</Fragment>
 		);
 	}
 }

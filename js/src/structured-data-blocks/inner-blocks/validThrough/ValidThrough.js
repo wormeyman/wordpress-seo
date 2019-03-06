@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -47,10 +47,9 @@ export default class ValidThrough extends Component {
 			return null;
 		}
 
-		return (
-			<li>
-				<span>{ __( "Vacancy expiration date", "wordpress-seo" ) + ": " } { attributes.validThrough }</span>
-			</li>
+		return ( <span>
+			{ __( "Vacancy expiration date", "wordpress-seo" ) + ": " } { attributes.validThrough }
+		</span>
 		);
 	}
 
@@ -62,7 +61,7 @@ export default class ValidThrough extends Component {
 	render() {
 		const { attributes } = this.props;
 
-		return <li>
+		return <Fragment>
 			<span>{ __( "Vacancy expiration date", "wordpress-seo" ) + ": " }</span>
 			<input
 				value={ attributes.validThrough }
@@ -70,7 +69,7 @@ export default class ValidThrough extends Component {
 				placeholder={ __( "11/08/2021", "wordpress-seo" ) }
 				onChange={ this.handleChangeText }
 			/>
-		</li>;
+		</Fragment>;
 	}
 }
 

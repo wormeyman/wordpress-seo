@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -46,15 +46,15 @@ export default class RemoteJob extends Component {
 		const { applicantLocationRequirements, jobLocationType } = attributes;
 
 		if ( applicantLocationRequirements && jobLocationType ) {
-			return <li>
+			return <span>
 				{ __( "This is a remote job in", "wordpress-seo" ) + " " }{ applicantLocationRequirements }
-			</li>;
+			</span>;
 		}
 
 		if ( ! applicantLocationRequirements && jobLocationType ) {
-			return <li>
+			return <span>
 				{ __( "This is a remote job", "wordpress-seo" ) }
-			</li>;
+			</span>;
 		}
 
 		return null;
@@ -70,7 +70,7 @@ export default class RemoteJob extends Component {
 
 		setAttributes( { jobLocationType: "TELECOMMUTE" } );
 
-		return <li>
+		return <Fragment>
 			<span>This is a remote job in </span>
 			<input
 				value={ attributes.applicantLocationRequirements }
@@ -78,7 +78,7 @@ export default class RemoteJob extends Component {
 				type="text"
 				placeholder={ __( "England (optional)", "wordpress-seo" ) }
 			/>
-		</li>;
+		</Fragment>;
 	}
 }
 

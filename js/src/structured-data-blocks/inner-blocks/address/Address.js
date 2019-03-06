@@ -2,12 +2,13 @@
 import { Component, Fragment } from "@wordpress/element";
 import { InnerBlocks } from "@wordpress/editor";
 
-const ALLOWED_BLOCKS = [
-	"yoast/addresslocality",
-	"yoast/adressregion",
-	"yoast/addresscountry",
-	"yoast/streetaddress",
-];
+/* Internal dependencies */
+import { NAME as ADDRESSLOCALITY } from "../addressLocality";
+import { NAME as ADDRESSREGION } from "../addressRegion";
+import { NAME as ADDRESSCOUNTRY } from "../addressCountry";
+import { NAME as STREETADDRESS } from "../streetAddress";
+import { NAME as POSTALCODE } from "../postalCode";
+
 
 /**
  * Represents an Address block within the schema blocks.
@@ -21,7 +22,13 @@ export default class Address extends Component {
 	render() {
 		return <Fragment>
 			<InnerBlocks
-				allowedBlocks={ ALLOWED_BLOCKS }
+				allowedBlocks={ [
+					ADDRESSLOCALITY,
+					ADDRESSREGION,
+					ADDRESSCOUNTRY,
+					STREETADDRESS,
+					POSTALCODE,
+				] }
 				templatelock={ false }
 			/>
 		</Fragment>;

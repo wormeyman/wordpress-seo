@@ -8,7 +8,7 @@ import { CATEGORY } from "../../constants";
 import AddressRegion from "./AddressRegion";
 
 const attributes = {
-	addressLocality: {
+	addressRegion: {
 		type: "string",
 	},
 };
@@ -27,7 +27,7 @@ export default () => {
 			__( "Region", "wordpress-seo" ),
 		],
 		parent: [ ADDRESS ],
-		// Allow only one AddressLocality block per post.
+		// Allow only one AddressRegion block per post.
 		supports: {
 			multiple: false,
 		},

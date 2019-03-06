@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -47,9 +47,7 @@ export default class CompanyWebsite extends Component {
 			return null;
 		}
 
-		return <li>
-			{ __( "Company website", "wordpress-seo" ) + ": " } { attributes.hiringOrganizationURL }
-		</li>;
+		return <span>{ __( "Company website", "wordpress-seo" ) + ": " } { attributes.hiringOrganizationURL }</span>;
 	}
 
 	/**
@@ -60,7 +58,7 @@ export default class CompanyWebsite extends Component {
 	render() {
 		const { attributes } = this.props;
 
-		return <li>
+		return <Fragment>
 			<span>{ __( "Company website", "wordpress-seo" ) + ": " }</span>
 			<input
 				value={ attributes.hiringOrganizationURL }
@@ -68,7 +66,7 @@ export default class CompanyWebsite extends Component {
 				type="url"
 				placeholder={ __( "https://yoast.com", "wordpress-seo" ) }
 			/>
-		</li>;
+		</Fragment>;
 	}
 }
 

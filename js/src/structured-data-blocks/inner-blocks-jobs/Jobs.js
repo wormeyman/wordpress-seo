@@ -8,7 +8,7 @@ import { NAME as EMPLOYMENT } from "../inner-blocks/employmentType";
 import { NAME as REMOTEJOB } from "../inner-blocks/remoteJob";
 import { NAME as COMPANYWEBSITE } from "../inner-blocks/companyWebsite";
 import { NAME as VALIDTHROUGH } from "../inner-blocks/validThrough";
-import { NAME as ADDRESSLOCALITY } from "../inner-blocks/addressLocality";
+import { NAME as ADDRESS } from "../inner-blocks/address";
 
 /**
  * Represents the Jobs block.
@@ -23,14 +23,21 @@ export default class Jobs extends Component {
 		return <Fragment>
 			<InnerBlocks
 				template={ [
-					[ SALARY, {}, [] ],
-					[ EMPLOYMENT, {},  [] ],
-					[ REMOTEJOB, {},  [] ],
-					[ COMPANYWEBSITE, {},  [] ],
-					[ VALIDTHROUGH, {},  [] ],
-					[ ADDRESSLOCALITY, {},  [] ],
+					SALARY,
+					EMPLOYMENT,
+					REMOTEJOB,
+					COMPANYWEBSITE,
+					VALIDTHROUGH,
+					ADDRESS,
 				] }
-				allowedBlocks={ [ SALARY, EMPLOYMENT, REMOTEJOB, COMPANYWEBSITE, VALIDTHROUGH, ADDRESSLOCALITY ] }
+				allowedBlocks={ [
+					SALARY,
+					EMPLOYMENT,
+					REMOTEJOB,
+					COMPANYWEBSITE,
+					VALIDTHROUGH,
+					ADDRESS,
+				] }
 			/>
 		</Fragment>;
 	}

@@ -1,5 +1,5 @@
 /* External dependencies */
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 /* Internal dependencies */
@@ -76,7 +76,7 @@ export default class EmploymentType extends Component {
 	 * @returns {ReactElement} The rendered HTML for the front end.
 	 */
 	static Content( { attributes } ) {
-		return <li>{ __( "This job is", "wordpress-seo" ) + " " }{ attributes.employmentTypeFrontEnd }</li>;
+		return <span>{ __( "This job is", "wordpress-seo" ) + " " }{ attributes.employmentTypeFrontEnd }</span>;
 	}
 
 	/**
@@ -89,7 +89,7 @@ export default class EmploymentType extends Component {
 
 		const employmentArray = EmploymentType.createEmploymentArray();
 
-		return <li>
+		return <Fragment>
 			<span>{ __( "This job is", "wordpress-seo" ) + " " }</span>
 			<select value={ attributes.employmentTypeFrontEnd } onChange={ this.handleChangeEmployment }>
 				{ employmentArray.map( employmentData => {
@@ -113,7 +113,7 @@ export default class EmploymentType extends Component {
 					);
 				} ) }
 			</select>
-		</li>;
+		</Fragment>;
 	}
 }
 
