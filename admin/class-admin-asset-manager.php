@@ -35,6 +35,13 @@ class WPSEO_Admin_Asset_Manager {
 	private $prefix;
 
 	/**
+	 * The WordPress version string
+	 *
+	 * @var string
+	 */
+	private $wp_version;
+
+	/**
 	 * Constructs a manager of assets. Needs a location to know where to register assets at.
 	 *
 	 * @param WPSEO_Admin_Asset_Location $asset_location The provider of the asset location.
@@ -47,6 +54,7 @@ class WPSEO_Admin_Asset_Manager {
 
 		$this->asset_location = $asset_location;
 		$this->prefix         = $prefix;
+		$this->wp_version     = $GLOBALS[ 'wp_version' ];
 	}
 
 	/**
@@ -73,13 +81,19 @@ class WPSEO_Admin_Asset_Manager {
 	 * @param WPSEO_Admin_Asset $script The script to register.
 	 */
 	public function register_script( WPSEO_Admin_Asset $script ) {
+		$script_handle = $this->prefix . $script->get_name();
 		wp_register_script(
-			$this->prefix . $script->get_name(),
+			$script_handle,
 			$this->get_url( $script, WPSEO_Admin_Asset::TYPE_JS ),
 			$script->get_deps(),
 			$script->get_version(),
 			$script->is_in_footer()
 		);
+
+		$textdomain = $script->get_textdomain();
+		if ( $textdomain !== false && version_compare( $wp_version, '5.0', '>=' ) ) {
+			wp_set_script_translations( $script_handle, $textdomain );
+		}
 	}
 
 	/**
@@ -345,6 +359,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'yoast-modal',
@@ -356,6 +371,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'help-center',
@@ -367,6 +383,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'admin-script',
@@ -427,6 +444,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'commons',
 				),
 				'in_footer' => false,
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'featured-image',
@@ -447,6 +465,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'commons',
 				),
 				'in_footer' => false,
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'post-scraper',
@@ -467,6 +486,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'term-scraper',
@@ -483,6 +503,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'replacevar-plugin',
@@ -526,6 +547,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name'    => 'select2',
@@ -557,6 +579,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'reindex-links',
@@ -605,6 +628,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'filter-explanation',
@@ -626,10 +650,12 @@ class WPSEO_Admin_Asset_Manager {
 				'name' => 'components',
 				'src'  => 'components-' . $flat_version,
 				'deps' => array(
+          'wp-i18n',
 					self::PREFIX . 'analysis',
 					self::PREFIX . 'styled-components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'structured-data-blocks',
@@ -641,6 +667,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'styled-components',
 					self::PREFIX . 'commons',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 			array(
 				'name' => 'styled-components',
@@ -658,6 +685,7 @@ class WPSEO_Admin_Asset_Manager {
 					self::PREFIX . 'styled-components',
 					self::PREFIX . 'components',
 				),
+        'textdomain' => 'wordpress-seo',
 			),
 		);
 	}

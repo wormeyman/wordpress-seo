@@ -136,6 +136,13 @@ class WPSEO_Admin_Asset {
 	protected $suffix;
 
 	/**
+	 * For JS Assets. The textdomain for the translations, if there are any.
+	 *
+	 * @var boolean
+	 */
+	protected $textdomain = false;
+
+	/**
 	 * Default asset arguments.
 	 *
 	 * @var array
@@ -167,14 +174,15 @@ class WPSEO_Admin_Asset {
 
 		$args = array_merge( $this->defaults, $args );
 
-		$this->name      = $args['name'];
-		$this->src       = $args['src'];
-		$this->deps      = $args['deps'];
-		$this->version   = $args['version'];
-		$this->media     = $args['media'];
-		$this->in_footer = $args['in_footer'];
-		$this->rtl       = $args['rtl'];
-		$this->suffix    = $args['suffix'];
+		$this->name       = $args['name'];
+		$this->src        = $args['src'];
+		$this->deps       = $args['deps'];
+		$this->version    = $args['version'];
+		$this->media      = $args['media'];
+		$this->in_footer  = $args['in_footer'];
+		$this->rtl        = $args['rtl'];
+		$this->suffix     = $args['suffix'];
+		$this->textdomain = array_key_exists( 'textdomain', $args ) ? $args[ 'textdomain' ] : false;
 	}
 
 	/**
@@ -238,6 +246,15 @@ class WPSEO_Admin_Asset {
 	 */
 	public function has_rtl() {
 		return $this->rtl;
+	}
+
+	/**
+	 * Returns whether this script has translations.
+	 *
+	 * @return boolean
+	 */
+	public function get_textdomain() {
+		return $this->textdomain;
 	}
 
 	/**
