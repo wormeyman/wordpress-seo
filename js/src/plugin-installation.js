@@ -6,6 +6,7 @@ import PluginInstallation from "./components/PluginInstallation";
 const store = configureStore();
 
 const el = document.createElement( "div" );
+el.setAttribute( "id", "wpseo-app-element" );
 document.getElementById( "extensions" ).append( el );
 
 window.onbeforeunload = () => {

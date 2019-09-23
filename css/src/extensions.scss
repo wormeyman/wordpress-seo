@@ -96,7 +96,6 @@
 
 		&-upsell {
 			width: 100%;
-			margin-bottom: 1em;
 
 			@media only screen and (min-width: $page-width-small) {
 				width: auto;
@@ -233,13 +232,14 @@
 		}
 	}
 
-
 	&-link--more-info {
 		background: url(svg-icon-info($color-pink-dark));
 		padding-left: calc( 1em + 5px );
 		background-size: 1em;
 		background-repeat: no-repeat;
 		background-position: left center;
+		display: inline-block;
+		margin-top: 16px;
 
 		&:after {
 			content: " \00BB";
@@ -250,6 +250,17 @@
 			margin: 0;
 			background-position: left center;
 		}
+	}
+
+	&-link--already-bought {
+		font-family: "Open Sans",Arial,sans-serif;
+		font-size: 1rem;
+		line-height: 1.88;
+		letter-spacing: 0.01em;
+		text-align: center;
+		display: inline-block;
+		margin-bottom: 16px;
+		margin-top: 8px;
 	}
 
 	&-heading-highlight {
