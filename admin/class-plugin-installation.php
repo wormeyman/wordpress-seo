@@ -30,7 +30,7 @@ class WPSEO_Plugin_Installation implements WPSEO_WordPress_Integration {
 				array(
 					'target'  => array(
 						'domain' => 'https://my.yoast.com',
-						'path'   => '/addsite?url=' . esc_html( home_url() ) . '&plugin=',
+						'path'   => '/install-plugins?url=' . esc_html( home_url() ) . '&products=',
 					),
 					'pluginNames' => WPSEO_Addon_Manager::get_addon_names(),
 				)
