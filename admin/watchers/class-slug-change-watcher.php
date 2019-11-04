@@ -118,6 +118,10 @@ class WPSEO_Slug_Change_Watcher implements WPSEO_WordPress_Integration {
 	 * @return bool Whether the post is viewable or not.
 	 */
 	protected function is_post_viewable( $post_id ) {
+		if ( is_multisite() && ms_is_switched() ) {
+			return false;
+		}
+
 		$post_type = get_post_type( $post_id );
 		if ( ! WPSEO_Post_Type::is_post_type_accessible( $post_type ) ) {
 			return false;
@@ -139,6 +143,10 @@ class WPSEO_Slug_Change_Watcher implements WPSEO_WordPress_Integration {
 	 * @return bool Whether the term is viewable or not.
 	 */
 	protected function is_term_viewable( $term_id ) {
+		if ( is_multisite() && ms_is_switched() ) {
+			return false;
+		}
+
 		$term = get_term( $term_id );
 
 		if ( ! $term || is_wp_error( $term ) ) {
