@@ -83,7 +83,7 @@ class WPSEO_Schema_HowTo implements WPSEO_Graph_Piece {
 			'description'      => '',
 		);
 
-		$json_description = strip_tags( $block['attrs']['jsonDescription'], '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' );
+		$json_description = addslashes( strip_tags( $block['attrs']['jsonDescription'], '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' ) );
 
 		if ( isset( $json_description ) ) {
 			$data['description'] = $json_description;
@@ -155,8 +155,8 @@ class WPSEO_Schema_HowTo implements WPSEO_Graph_Piece {
 				'url'   => $schema_id,
 			);
 
-			$json_text = strip_tags( $step['jsonText'], $this->allowed_json_text_tags );
-			$json_name = wp_strip_all_tags( $step['jsonName'] );
+			$json_text = addslashes( strip_tags( $step['jsonText'], $this->allowed_json_text_tags ) );
+			$json_name = addslashes( wp_strip_all_tags( $step['jsonName'] ) );
 
 			if ( empty( $json_name ) ) {
 				if ( empty( $step['text'] ) ) {
@@ -198,7 +198,7 @@ class WPSEO_Schema_HowTo implements WPSEO_Graph_Piece {
 	 * @param array $step        The step block data.
 	 */
 	private function add_step_description( &$schema_step, $step ) {
-		$json_text = strip_tags( $step['jsonText'], $this->allowed_json_text_tags );
+		$json_text = addslashes( strip_tags( $step['jsonText'], $this->allowed_json_text_tags ) );
 
 		if ( empty( $json_text ) ) {
 			return;

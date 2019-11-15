@@ -80,11 +80,11 @@ class WPSEO_Schema_FAQ_Questions {
 			'@id'            => $this->context->canonical . '#' . $question['id'],
 			'position'       => $this->position ++,
 			'url'            => $this->context->canonical . '#' . $question['id'],
-			'name'           => wp_strip_all_tags( $question['jsonQuestion'] ),
+			'name'           => addslashes( wp_strip_all_tags( $question['jsonQuestion'] ) ),
 			'answerCount'    => 1,
 			'acceptedAnswer' => array(
 				'@type' => 'Answer',
-				'text'  => strip_tags( $question['jsonAnswer'], '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' ),
+				'text'  => addslashes( strip_tags( $question['jsonAnswer'], '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' ) ),
 			),
 		);
 	}
