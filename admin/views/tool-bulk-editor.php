@@ -67,7 +67,7 @@ get_current_screen()->set_screen_reader_content( $yoast_free_screen_reader_conte
 if ( ! empty( $_REQUEST['_wp_http_referer'] ) && isset( $_SERVER['REQUEST_URI'] ) ) {
 	$request_uri = sanitize_file_name( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 
-	wp_redirect(
+	wp_safe_redirect(
 		remove_query_arg(
 			[ '_wp_http_referer', '_wpnonce' ],
 			$request_uri
