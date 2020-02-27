@@ -1448,6 +1448,7 @@ class WPSEO_Frontend {
 	 * @return void
 	 */
 	public function do_attachment_redirect( $attachment_url ) {
+		// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Reason: Developers can change the attachment_url using a filter.
 		wp_redirect( $attachment_url, 301, 'Yoast SEO' );
 		exit;
 	}
