@@ -230,7 +230,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 			$focus_keyword = $this->get_post_focus_keyword( $post );
 
 			if ( ! empty( $focus_keyword ) ) {
-				$trends_url .= '#q=' . urlencode( $focus_keyword );
+				$trends_url .= '#q=' . rawurlencode( $focus_keyword );
 			}
 		}
 
@@ -281,6 +281,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 	 */
 	protected function add_analysis_submenu( WP_Admin_Bar $wp_admin_bar ) {
 		$url           = WPSEO_Frontend::get_instance()->canonical( false );
+
 		$focus_keyword = '';
 
 		if ( ! $url ) {
@@ -300,7 +301,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 		];
 		$wp_admin_bar->add_menu( $menu_args );
 
-		$encoded_url   = urlencode( $url );
+		$encoded_url   = rawurlencode( $url );
 		$submenu_items = [
 			[
 				'id'     => 'wpseo-inlinks',
@@ -311,7 +312,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 				'id'     => 'wpseo-kwdensity',
 				'title'  => __( 'Check Keyphrase Density', 'wordpress-seo' ),
 				// HTTPS not available.
-				'href'   => 'http://www.zippy.co.uk/keyworddensity/index.php?url=' . $encoded_url . '&keyword=' . urlencode( $focus_keyword ),
+				'href'   => 'http://www.zippy.co.uk/keyworddensity/index.php?url=' . $encoded_url . '&keyword=' . rawurlencode( $focus_keyword ),
 			],
 			[
 				'id'     => 'wpseo-cache',
