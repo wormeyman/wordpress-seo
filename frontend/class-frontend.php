@@ -1341,6 +1341,7 @@ class WPSEO_Frontend {
 
 			$redir = $this->get_seo_meta_value( 'redirect', $post->ID );
 			if ( $redir !== '' ) {
+				// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Reason: The SEO meta value is controlled by the user and is probably external.
 				wp_redirect( $redir, 301, 'Yoast SEO' );
 				exit;
 			}
