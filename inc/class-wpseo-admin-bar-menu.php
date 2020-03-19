@@ -306,7 +306,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 			[
 				'id'     => 'wpseo-inlinks',
 				'title'  => __( 'Check links to this URL', 'wordpress-seo' ),
-				'href'   => 'https://search.google.com/search-console/links/drilldown?resource_id=' . urlencode( get_option( 'siteurl' ) ) . '&type=EXTERNAL&target=' . $encoded_url . '&domain=',
+				'href'   => 'https://search.google.com/search-console/links/drilldown?resource_id=' . rawurlencode( get_option( 'siteurl' ) ) . '&type=EXTERNAL&target=' . $encoded_url . '&domain=',
 			],
 			[
 				'id'     => 'wpseo-kwdensity',
@@ -410,7 +410,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 				'parent' => self::SETTINGS_SUBMENU_IDENTIFIER,
 				'id'     => $id,
 				'title'  => $submenu_page[2],
-				'href'   => admin_url( 'admin.php?page=' . urlencode( $submenu_page[4] ) ),
+				'href'   => admin_url( 'admin.php?page=' . rawurlencode( $submenu_page[4] ) ),
 			];
 			$wp_admin_bar->add_menu( $menu_args );
 		}
