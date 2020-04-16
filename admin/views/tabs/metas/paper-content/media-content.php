@@ -33,7 +33,7 @@ $yform->toggle_switch(
 	<?php
 	$noindex_option_name = 'noindex-' . $wpseo_post_type->name;
 
-	if ( WPSEO_Options::get( 'is-media-purge-relevant' ) && WPSEO_Options::get( $noindex_option_name ) === false ) {
+	if ( WPSEO_Options::get( 'disable-attachment' ) === false && WPSEO_Options::get( $noindex_option_name ) === false ) {
 		$description  = esc_html__(
 			'By enabling this option, attachment URLs become visible to both your visitors and Google. To add value to your website, they should contain useful information, or they might have a negative impact on your ranking.',
 			'wordpress-seo'
