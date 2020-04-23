@@ -453,7 +453,7 @@ class WPSEO_Admin_Bar_Menu implements WPSEO_WordPress_Integration {
 				'parent' => self::NETWORK_SETTINGS_SUBMENU_IDENTIFIER,
 				'id'     => $id,
 				'title'  => $submenu_page[2],
-				'href'   => network_admin_url( 'admin.php?page=' . urlencode( $submenu_page[4] ) ),
+				'href'   => network_admin_url( 'admin.php?page=' . rawurlencode( $submenu_page[4] ) ),
 			];
 			$wp_admin_bar->add_menu( $menu_args );
 		}
