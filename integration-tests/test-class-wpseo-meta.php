@@ -166,6 +166,7 @@ class WPSEO_Meta_Test extends WPSEO_UnitTestCase {
 		$this->register_meta_key( $key, true );
 
 		$array = [ 'ke\\y' => '""slashed data" \\"' ];
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Reason: This is used in test code, not in production.
 		$value = serialize( $array );
 
 		WPSEO_Meta::set_value( $key, $value, $post_id );
