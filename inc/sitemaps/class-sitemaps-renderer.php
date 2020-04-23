@@ -369,6 +369,7 @@ class WPSEO_Sitemaps_Renderer {
 		$output = "\n<!-- {$memory_used}MB | {$queries_run} -->";
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Reason: this is debug output.
 			$queries = print_r( $GLOBALS['wpdb']->queries, true );
 			$output .= "\n<!-- {$queries} -->";
 		}
