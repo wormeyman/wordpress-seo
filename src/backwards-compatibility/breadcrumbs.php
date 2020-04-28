@@ -61,13 +61,6 @@ class WPSEO_Breadcrumbs implements Initializer_Interface {
 	protected $replace_vars;
 
 	/**
-	 * @inheritDoc
-	 */
-	public static function get_conditionals() {
-		return [ Front_End_Conditional::class ];
-	}
-
-	/**
 	 * WPSEO_Breadcrumbs constructor.
 	 *
 	 * @param Meta_Tags_Context_Memoizer $context_memoizer The context memoizer.
