@@ -44,6 +44,8 @@ class Title_Presenter extends Abstract_Indexable_Tag_Presenter {
 		 */
 		$title = \apply_filters( 'wpseo_title', $title, $this->presentation );
 		$title = $this->helpers->string->strip_all_tags( \stripslashes( $title ) );
+		$title = \wptexturize( $title );
+		$title = \convert_chars( $title );
 		return \trim( $title );
 	}
 }
