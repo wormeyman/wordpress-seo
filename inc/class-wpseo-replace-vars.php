@@ -110,34 +110,32 @@ class WPSEO_Replace_Vars {
 	 * @return bool Whether the replacement function was succesfully registered.
 	 */
 	public static function register_replacement( $var, $replace_function, $type = 'advanced', $help_text = '' ) {
-		$success = false;
-
-		if ( is_string( $var ) && $var !== '' ) {
-			$var = self::remove_var_delimiter( $var );
-
-			if ( preg_match( '`^[A-Z0-9_-]+$`i', $var ) === false ) {
-				trigger_error( esc_html__( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
-			}
-			elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
-				trigger_error( esc_html__( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
-			}
-			elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
-				if ( $var !== '' && ! isset( self::$external_replacements[ $var ] ) ) {
-					self::$external_replacements[ $var ] = $replace_function;
-					$replacement_variable                = new WPSEO_Replacement_Variable( $var, $var, $help_text );
-					self::register_help_text( $type, $replacement_variable );
-					$success = true;
-				}
-				else {
-					trigger_error( esc_html__( 'A replacement variable with the same name has already been registered. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
-				}
-			}
-			else {
-				trigger_error( esc_html__( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
-			}
+		$var = self::remove_var_delimiter( $var );
+		
+		if ( ! is_string( $var ) || $var === '' ) {
+			return false;
 		}
 
-		return $success;
+		if ( preg_match( '`^[A-Z0-9_-]+$`i', $var ) === false ) {
+			return false;
+		}
+		
+		if ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
+			return false;
+		}
+		
+		if ( method_exists( __CLASS__, 'retrieve_' . $var ) ) {
+			return false;
+		}
+
+		if ( isset( self::$external_replacements[ $var ] ) ) {
+			return false;
+		}
+		
+		self::$external_replacements[ $var ] = $replace_function;
+		$replacement_variable = new WPSEO_Replacement_Variable( $var, $var, $help_text );
+		self::register_help_text( $type, $replacement_variable );
+		return true;
 	}
 
 	/**
