@@ -36,4 +36,14 @@
 	fill: var(--yoast-color-link);
 }
 
+.yoast-help:focus {
+	box-shadow: none;
+	outline: 0;
+}
+
+.yoast-help:focus svg {
+	box-shadow: var(--yoast-color-focus);
+	border-radius: 100%;
+}
+
 /*# sourceMappingURL=icons.css.map */
