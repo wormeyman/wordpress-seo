@@ -43,16 +43,22 @@ class Invalid_Pagination implements Integration_Interface {
 
 	/**
 	 * Hooks our potential redirect.
+	 *
+	 * @return void
 	 */
 	public function register_hooks() {
 		add_action( 'template_redirect', [ $this, 'redirect_out_of_bounds' ] );
 	}
 
 	/**
+	 * Redirect a 404 for "out of bounds" pagination numbers to the beginning of the series. This is a 302 by design as its temporary.
 	 *
+	 * @return void
 	 */
 	public function redirect_out_of_bounds() {
-		global $wp_query, $wp_rewrite;
+		global $wp_rewrite;
+
+		$wp_query = $this->wp_query->get_main_query();
 		if ( $wp_query->is_404 && $wp_query->query['paged'] > $wp_query->max_num_pages ) {
 			$current_url = get_site_url() . $_SERVER['REQUEST_URI'];
 			$format      = $wp_rewrite->using_permalinks() ? user_trailingslashit( $wp_rewrite->pagination_base . '/%#%', 'paged' ) : '?paged=%#%';
