@@ -110,11 +110,13 @@ class WordPressUserSelectorSearchAppearance extends Component {
 		return (
 			<Fragment>
 				{ this.renderError() }
-				<label
-					htmlFor="wpseo-person-selector-name"
-				>
-					{ __( "Name", "wordpress-seo" ) }
-				</label>
+				<div className={ "yoast-field-group__title" }>
+					<label
+						htmlFor="wpseo-person-selector-name"
+					>
+						{ __( "Name", "wordpress-seo" ) }
+					</label>
+				</div>
 				<WordPressUserSelector
 					hasLabel={ false }
 					name={ "wpseo-person-selector-name" }

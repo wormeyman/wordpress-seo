@@ -41,10 +41,12 @@ const TextContainer = styled.div`
 `;
 
 const Header = styled.h3`
+	.yoast #wpcontent h3&,
 	&& {
 		font-size: 1.15em;
 		font-weight: bold;
 		margin: 4px 0;
+		color: #333;
 	}
 `;
 

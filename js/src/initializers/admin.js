@@ -148,14 +148,7 @@ export default function initAdmin( jQuery ) {
 	 * @returns {void}
 	 */
 	function initSelect2() {
-		var select2Width = "400px";
-
-		// Select2 for Twitter card meta data in Settings
-		jQuery( "#twitter_card_type" ).select2( {
-			width: select2Width,
-			language: wpseoScriptData.userLanguageCode,
-			dropdownCssClass: "yoast-select__dropdown",
-		} );
+		var select2Width = "300px";
 
 		// Select2 for taxonomy breadcrumbs in Advanced
 		jQuery( "#breadcrumbs select" ).select2( {
@@ -221,11 +214,41 @@ export default function initAdmin( jQuery ) {
 	// eslint-disable-next-line
 	window.wpseoSetTabHash = wpseoSetTabHash;
 
+	/**
+	 * Toggles the company and person detailled controls on/off.
+	 *
+	 * @returns {void}
+	 */
+	function togglePersonCompany() {
+		if ( jQuery( "#company_or_person-company" ).is( ":checked" ) ) {
+			jQuery( "#knowledge-graph-company" ).show();
+			jQuery( "#knowledge-graph-person" ).hide();
+			return;
+		}
+
+		if ( jQuery( "#company_or_person-person" ).is( ":checked" ) ) {
+			jQuery( "#knowledge-graph-person" ).show();
+			jQuery( "#knowledge-graph-company" ).hide();
+			return;
+		}
+
+		jQuery( "#knowledge-graph-person" ).hide();
+		jQuery( "#knowledge-graph-company" ).hide();
+	}
+
 	jQuery( document ).ready( function() {
 		/**
 		 * When the hash changes, get the base url from the action and then add the current hash.
 		 */
 		wpseoSetTabHash();
+
+		jQuery( ".yoast-toggle--inactive" ).click( function() {
+			jQuery( this ).parent().find( "input" ).prop( "checked", false ).change();
+		} );
+
+		jQuery( ".yoast-toggle--active" ).click( function() {
+			jQuery( this ).parent().find( "input" ).prop( "checked", true ).change();
+		} );
 
 		// Toggle the Author archives section.
 		jQuery( "#disable-author" ).change( function() {
@@ -252,6 +275,11 @@ export default function initAdmin( jQuery ) {
 				setAuthorsWithoutPostsToggleVisibilty( true );
 			}
 		} );
+
+		// Toggle the Twitter card settings.
+		jQuery( "#twitter" ).change( function() {
+			jQuery( "#wpseo-twitter-settings" ).toggle( jQuery( this ).is( ":checked" ) );
+		} ).change();
 
 		// Toggle the Date archives section.
 		jQuery( "#disable-date" ).change( function() {
@@ -291,20 +319,8 @@ export default function initAdmin( jQuery ) {
 			jQuery( window ).trigger( "yoast-seo-tab-change" );
 		} );
 
-		// Handle the Company or Person select.
-		jQuery( "#company_or_person" ).change( function() {
-			var companyOrPerson = jQuery( this ).val();
-			if ( "company" === companyOrPerson ) {
-				jQuery( "#knowledge-graph-company" ).show();
-				jQuery( "#knowledge-graph-person" ).hide();
-			} else if ( "person" === companyOrPerson ) {
-				jQuery( "#knowledge-graph-company" ).hide();
-				jQuery( "#knowledge-graph-person" ).show();
-			} else {
-				jQuery( "#knowledge-graph-company" ).hide();
-				jQuery( "#knowledge-graph-person" ).hide();
-			}
-		} ).change();
+		jQuery( "#company_or_person-company" ).change( togglePersonCompany );
+		jQuery( "#company_or_person-person" ).change( togglePersonCompany ).change();
 
 		// Check correct variables usage in title and description templates.
 		jQuery( ".template" ).on( "input", function() {
