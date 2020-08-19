@@ -2,7 +2,7 @@ def runTests( phpVersion ) {
     docker.image( "wordpressdevelop/php:${phpVersion}-fpm" ).inside {
         stage( "${phpVersion} Tests" ){
             try {
-                sh "vendor/bin/phpunit -c phpunit.xml.dist --log-junit build/logs/junit-${phpVersion}.xml"
+                sh "vendor/bin/phpunit -d memory_limit=64M -c phpunit.xml.dist --log-junit build/logs/junit-${phpVersion}.xml"
             } finally {
                 junit "build/logs/junit-${phpVersion}.xml"
             }
@@ -66,14 +66,17 @@ node( 'docker-agent' ) {
             }
         },
         php73: {
+            runTests( '7.3' );
+        },
+        php74: {
             // Run tests with code coverage
-            docker.image( "wordpressdevelop/php:7.3-fpm" ).inside {
-                stage( "7.3 Tests" ){
+            docker.image( "wordpressdevelop/php:7.4-fpm" ).inside {
+                stage( "7.4 Tests" ){
                     sh 'docker-php-ext-enable xdebug'
                     try {
-                        sh "vendor/bin/phpunit -c phpunit.xml.dist --log-junit build/logs/junit-7.3.xml --coverage-html build/coverage --coverage-clover build/logs/clover.xml"
+                        sh "vendor/bin/phpunit -c phpunit.xml.dist --log-junit build/logs/junit-7.4.xml --coverage-html build/coverage --coverage-clover build/logs/clover.xml"
                     } finally {
-                        junit "build/logs/junit-7.3.xml"
+                        junit "build/logs/junit-7.4.xml"
                         step ([
                             $class: 'CloverPublisher',
                             cloverReportDir: "build/coverage",
@@ -81,13 +84,10 @@ node( 'docker-agent' ) {
                             healthyTarget: [ methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80 ],
                             unhealthyTarget: [ methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50 ],
                             failingTarget: [ methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0 ]
-                        ] )
+                        ])
                     }
                 }
             }
-        },
-        php74: {
-            runTests( '7.4' );
         },
         php80: {
             runTests( '8.0' );
@@ -99,6 +99,35 @@ node( 'docker-agent' ) {
     stage( 'Post build actions' ) {
         sh 'git fetch --tags'
         def tag = sh( script: "git describe --exact-match --tags ${scmVars.GIT_COMMIT}", returnStdout: true ).trim()
-        build job: 'wpseo-woocommerce/artifact', parameters: [ [ $class: 'StringParameterValue', name: 'commit', value: scmVars.GIT_COMMIT ], [ $class: 'StringParameterValue', name: 'version', value: tag ] ]
+        build job: 'wpseo/artifact', parameters: [ [ $class: 'StringParameterValue', name: 'commit', value: scmVars.GIT_COMMIT ], [ $class: 'StringParameterValue', name: 'version', value: tag ] ]
+    }
+    post {
+    	success {
+			def attachments = [
+			  [
+				text: 'Test result: success',
+				color: '#ff0000'
+			  ]
+			]
+			slackSend(channel: "#jenkins-test", attachments: attachments)
+    	}
+    	failure {
+			def attachments = [
+			  [
+				text: 'Test result: failure',
+				color: '#ff0000'
+			  ]
+			]
+			slackSend(channel: "#jenkins-test", attachments: attachments)
+    	}
+    	unstable {
+			def attachments = [
+			  [
+				text: 'Test result: unstable',
+				color: '#ff0000'
+			  ]
+			]
+			slackSend(channel: "#jenkins-test", attachments: attachments)
+    	}
     }
 }
