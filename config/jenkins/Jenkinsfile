@@ -106,7 +106,7 @@ node( 'docker-agent' ) {
 						color: '#ff0000'
 					  ]
 					]
-					slackSend(channel: "#jenkins-test", attachments: attachments)
+					slackSend(channel: "jenkins-test", attachments: attachments)
 				} else {
 					def attachments = [
 					  [
@@ -114,7 +114,7 @@ node( 'docker-agent' ) {
 						color: '#ff0000'
 					  ]
 					]
-					slackSend(channel: "#jenkins-test", attachments: attachments)
+					slackSend(channel: "jenkins-test", attachments: attachments)
 				}
 			}
 		}
