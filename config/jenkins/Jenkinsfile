@@ -20,7 +20,7 @@ node( 'docker-agent' ) {
     }
     parallel(
         other: {
-            docker.image( 'wordpressdevelop/php:7.3-fpm' ).inside {
+            docker.image( 'wordpressdevelop/php:7.4-fpm' ).inside {
                 parallel(
                     phplint: {
                         stage( 'Linting' ) {
@@ -97,37 +97,30 @@ node( 'docker-agent' ) {
         }
     )
     stage( 'Post build actions' ) {
+    	 steps {
+			script {
+				if (currentBuild.result == 'SUCCESS') {
+					def attachments = [
+					  [
+						text: 'Test result: success',
+						color: '#ff0000'
+					  ]
+					]
+					slackSend(channel: "#jenkins-test", attachments: attachments)
+				} else {
+					def attachments = [
+					  [
+						text: 'Test result: failure',
+						color: '#ff0000'
+					  ]
+					]
+					slackSend(channel: "#jenkins-test", attachments: attachments)
+				}
+			}
+		}
+
         sh 'git fetch --tags'
         def tag = sh( script: "git describe --exact-match --tags ${scmVars.GIT_COMMIT}", returnStdout: true ).trim()
         build job: 'wpseo/artifact', parameters: [ [ $class: 'StringParameterValue', name: 'commit', value: scmVars.GIT_COMMIT ], [ $class: 'StringParameterValue', name: 'version', value: tag ] ]
-    }
-    post {
-    	success {
-			def attachments = [
-			  [
-				text: 'Test result: success',
-				color: '#ff0000'
-			  ]
-			]
-			slackSend(channel: "#jenkins-test", attachments: attachments)
-    	}
-    	failure {
-			def attachments = [
-			  [
-				text: 'Test result: failure',
-				color: '#ff0000'
-			  ]
-			]
-			slackSend(channel: "#jenkins-test", attachments: attachments)
-    	}
-    	unstable {
-			def attachments = [
-			  [
-				text: 'Test result: unstable',
-				color: '#ff0000'
-			  ]
-			]
-			slackSend(channel: "#jenkins-test", attachments: attachments)
-    	}
     }
 }
