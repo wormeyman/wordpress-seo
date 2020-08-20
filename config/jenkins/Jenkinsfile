@@ -72,6 +72,7 @@ node( 'docker-agent' ) {
             // Run tests with code coverage
             docker.image( "wordpressdevelop/php:7.4-fpm" ).inside {
                 stage( "7.4 Tests" ){
+                	slackSend channel: 'name', message: 'start debug'
                     sh 'docker-php-ext-enable xdebug'
                     try {
                         sh "vendor/bin/phpunit -c phpunit.xml.dist --log-junit build/logs/junit-7.4.xml --coverage-html build/coverage --coverage-clover build/logs/clover.xml"
@@ -100,21 +101,9 @@ node( 'docker-agent' ) {
     	 steps {
 			script {
 				if (currentBuild.result == 'SUCCESS') {
-					def attachments = [
-					  [
-						text: 'Test result: success',
-						color: '#ff0000'
-					  ]
-					]
-					slackSend(channel: "jenkins-test", attachments: attachments)
+					slackSend channel: 'name', message: 'message'
 				} else {
-					def attachments = [
-					  [
-						text: 'Test result: failure',
-						color: '#ff0000'
-					  ]
-					]
-					slackSend(channel: "jenkins-test", attachments: attachments)
+					slackSend channel: 'name', message: 'message fail'
 				}
 			}
 		}
