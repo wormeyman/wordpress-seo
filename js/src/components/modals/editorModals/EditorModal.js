@@ -52,7 +52,7 @@ const EditorModal = ( { postTypeName, children, title } ) => {
 					<Modal
 						title={ title }
 						onRequestClose={ closeModal }
-						additionalClassName="yoast-collapsible-modal yoast-post-settings-modal"
+						additionalClassName="yoast-collapsible-modal yoast-editor-modal"
 					>
 						<div className="yoast-content-container">
 							<div className="yoast-modal-content">
@@ -69,7 +69,7 @@ const EditorModal = ( { postTypeName, children, title } ) => {
 									}
 								</p>
 								<button
-									className="yoast-button yoast-button--primary yoast-button--post-settings-modal"
+									className="yoast-button yoast-button--primary yoast-button--editor-modal"
 									type="button"
 									onClick={ closeModal }
 								>

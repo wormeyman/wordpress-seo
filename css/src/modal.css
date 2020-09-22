@@ -351,8 +351,8 @@
 	}
 }
 
-/* Specific styling for the PostSettingsModal */
-.yoast-post-settings-modal {
+/* Specific styling for the EditorModal */
+.yoast-editor-modal {
 	width: 880px;
 	height: 100%;
 	max-width: calc(100% - 48px - 48px);
@@ -364,26 +364,26 @@
 	padding: 16px;
 }
 
-.yoast-post-settings-modal__button-container {
+.yoast-editor-modal__button-container {
 	padding: 16px;
 	display: flex;
 	flex-direction: column;
 	border-bottom: 1px solid rgba( 0,0,0,0.2 );
 }
 
-.yoast-post-settings-modal .components-modal__content {
+.yoast-editor-modal .components-modal__content {
 	padding: 0;
 	display: flex;
 	flex-direction: column;
 }
 
-.yoast-post-settings-modal .components-modal__header {
+.yoast-editor-modal .components-modal__header {
 	margin: 0;
 	flex-shrink: 0;
 	border-bottom: var(--yoast-border-default);
 }
 
-.yoast-post-settings-modal .yoast-notice-container {
+.yoast-editor-modal .yoast-notice-container {
 	z-index: 1;
 	position: sticky;
 	bottom: 0;
@@ -398,17 +398,17 @@
  * As this is only needed when the content overflows, it is hard to make a good CSS rule for this case.
  * Adding a negative margin solves the problem and has no noticeable effect when the margin was not really needed.
  */
-.yoast-post-settings-modal .yoast-notice-container > hr {
+.yoast-editor-modal .yoast-notice-container > hr {
 	margin-top: -1px;
 	margin-bottom: 0;
 }
 
 /* Set overflow-y to scroll and hide the scrollbar on FireFox. */
-.yoast-post-settings-modal .yoast-content-container {
+.yoast-editor-modal .yoast-content-container {
 	overflow-y: auto;
 }
 
-.yoast-post-settings-modal .yoast-button-container {
+.yoast-editor-modal .yoast-button-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -416,34 +416,34 @@
 	margin: 0;
 }
 
-.yoast-post-settings-modal .yoast-button-container p {
+.yoast-editor-modal .yoast-button-container p {
 	color: var(--yoast-color-label-help);
 	padding-right: 24px;
 	align-self: center;
 }
 
-.yoast-post-settings-modal .yoast-button-container button {
+.yoast-editor-modal .yoast-button-container button {
 	flex-shrink: 0;
 	max-height: 45px;
 	align-self: center;
 }
 
-/* Responsive CSS for the mobile PostSettingsModal */
+/* Responsive CSS for the mobile EditorModal */
 @media only screen and (max-width: 600px){
 	/* Make the modal fullscreen. */
-	.yoast-post-settings-modal {
+	.yoast-editor-modal {
 		max-height: 100%;
 		max-width: 100%;
 	}
 
 	/* Align the button and notice so that they have the spacing between them. */
-	.yoast-post-settings-modal .yoast-button-container {
+	.yoast-editor-modal .yoast-button-container {
 		padding: 16px 16px 16px;
 		justify-content: space-between;
 	}
 
 	/* Unset the padding for the p on mobile devices */
-	.yoast-post-settings-modal .yoast-button-container p {
+	.yoast-editor-modal .yoast-button-container p {
 		padding-right: 0;
 	}
 }
